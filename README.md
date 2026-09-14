@@ -1,54 +1,25 @@
-# CrewAI 2.0
+# Magnus (clean-room MVP)
 
-A [CrewAI](https://crewai.com) **2.x JSON-first** project: agents live in `agents/*.jsonc`, tasks and crew settings in `crew.jsonc`, and `crewai run` loads that definition directly.
+Adaptive personal intelligence system — **Telegram-first** 21-day MVP. This repository is a clean-room rebuild; product and engineering direction live in the starter kit, not in legacy Magnus repos.
 
-This repo ships a two-agent **research crew** that gathers information on a topic and writes a markdown report to `output/report.md`.
+## Starter kit (read this first)
 
-## Prerequisites
+| Document | Path |
+|----------|------|
+| Core problem definition | [docs/starter-kit/CORE_PROBLEM.md](docs/starter-kit/CORE_PROBLEM.md) |
+| 21-day MVP build plan | [docs/starter-kit/MVP_BUILD_PLAN.md](docs/starter-kit/MVP_BUILD_PLAN.md) |
+| Daily build gates | [docs/starter-kit/BUILD_GATES.md](docs/starter-kit/BUILD_GATES.md) |
 
-- Python 3.10–3.13
-- [uv](https://docs.astral.sh/uv/) (recommended) or pip
-- [CrewAI CLI](https://docs.crewai.com/en/installation): `uv tool install crewai`
+Index and usage: [docs/starter-kit/README.md](docs/starter-kit/README.md).
 
-## Setup
+## Project rules
 
-```bash
-cp .env.example .env
-# Add OPENAI_API_KEY and SERPER_API_KEY (for web search)
-crewai install
-```
+Cursor rules in [`.cursor/rules/`](.cursor/rules/) include clean-room constraints and mandatory reference to the starter kit.
 
-## Run
+## Implementation status
 
-```bash
-crewai run
-```
+Day 1 foundation (FastAPI, PostgreSQL, Telegram `/start`, `PRODUCT_CONTRACT.md`, etc.) is defined in the build plan — not yet implemented in this repo.
 
-Default input topic is set in `crew.jsonc` under `inputs`. Change `topic` there, or remove it to be prompted at runtime.
+## Legacy scaffold note
 
-## Project layout
-
-```text
-├── agents/
-│   ├── researcher.jsonc
-│   └── analyst.jsonc
-├── crew.jsonc
-├── knowledge/          # optional knowledge files
-├── skills/             # optional agent skills
-├── tools/              # custom tools (custom:<name>)
-├── output/             # generated report
-├── pyproject.toml
-└── .env
-```
-
-## Customize
-
-- Edit agent roles, goals, and models in `agents/*.jsonc`
-- Edit task flow, memory, and inputs in `crew.jsonc`
-- Add built-in tools (e.g. `FileReadTool`) or `custom:my_tool` entries pointing at `tools/my_tool.py`
-
-See the [first crew guide](https://docs.crewai.com/en/guides/crews/first-crew) for more.
-
-## Security
-
-`custom:` tools and Python callbacks in JSON execute local code when the crew loads. Only run projects from sources you trust.
+An early [CrewAI](https://crewai.com) JSON-first sample (`crew.jsonc`, `agents/`) remains in the tree from initial project setup. It is **not** part of the Magnus MVP spec and will be replaced or removed as Magnus Day 1 work lands.

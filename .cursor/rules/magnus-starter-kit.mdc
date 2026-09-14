@@ -1,0 +1,17 @@
+---
+alwaysApply: true
+---
+
+# Magnus build reference (starter kit)
+
+When planning or implementing Magnus MVP work, treat these repo documents as authoritative:
+
+- `docs/starter-kit/CORE_PROBLEM.md` — product problem, four questions, control loop, principles
+- `docs/starter-kit/MVP_BUILD_PLAN.md` — 21-day scope, architecture direction, daily objectives, non-goals
+- `docs/starter-kit/BUILD_GATES.md` — per-day PASS/FAIL criteria and end-of-day audit process
+
+Before adding features, apply the hard rules in `MVP_BUILD_PLAN.md` (four questions, maintenance burden, facts vs interpretations, LLM must not corrupt state).
+
+At the start of a build day: read the relevant day in `MVP_BUILD_PLAN.md` and gate criteria in `BUILD_GATES.md`. At the end: run the Day [X] audit from `BUILD_GATES.md` before starting the next day.
+
+Do not scope from deprecated Magnus codebases; only from this starter kit, user instructions, and code already in **this** repository.

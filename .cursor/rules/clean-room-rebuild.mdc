@@ -1,0 +1,15 @@
+---
+alwaysApply: true
+---
+
+# Clean-room rebuild (Magnus)
+
+This is a clean-room rebuild. Do not inspect, copy, port, or infer architecture from any previous Magnus repository unless I explicitly ask you to.
+
+Treat previous Magnus implementations as deprecated and potentially contaminated by incorrect product assumptions.
+
+When building or changing this project:
+
+- Derive design from current requirements, official docs, and code in **this** repository only.
+- Do not use prior Magnus repos as reference for folder layout, APIs, data models, naming, or workflows unless I give explicit permission in the conversation.
+- If a task might require legacy Magnus context, stop and ask rather than pulling from old codebases or memory of them.

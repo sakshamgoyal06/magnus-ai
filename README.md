@@ -2,6 +2,9 @@
 
 Adaptive personal intelligence system — **Telegram-first** 21-day MVP. This repository is a clean-room rebuild; product and engineering direction live in the starter kit, not in legacy Magnus repos.
 
+**Repository:** [saksham-goyal/magnus-ai](https://origin.cursor.com/saksham-goyal/magnus-ai)  
+**Git remote (`origin`):** `https://origin.cursor.com/git/saksham-goyal/magnus-ai.git`
+
 ## Starter kit (read this first)
 
 | Document | Path |

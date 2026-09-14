@@ -6,3 +6,4 @@ output/report.md
 *.egg-info/
 dist/
 build/
+agent-tools/

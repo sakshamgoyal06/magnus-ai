@@ -1,0 +1,27 @@
+{
+  "name": "CrewAI 2.0 Research Crew",
+  "agents": ["researcher", "analyst"],
+  "tasks": [
+    {
+      "name": "research_task",
+      "description": "Conduct thorough research on {topic}. Focus on key concepts, recent developments, major challenges, notable applications, and future outlook.",
+      "expected_output": "A comprehensive research document with organized sections, specific facts, and useful examples about {topic}.",
+      "agent": "researcher"
+    },
+    {
+      "name": "analysis_task",
+      "description": "Analyze the research findings and create a polished report on {topic}. Include an executive summary, key insights, trend analysis, and recommendations.",
+      "expected_output": "A professional markdown report with clear headings, a concise summary, main findings, and recommendations.",
+      "agent": "analyst",
+      "context": ["research_task"],
+      "output_file": "output/report.md",
+      "markdown": true
+    }
+  ],
+  "process": "sequential",
+  "verbose": true,
+  "memory": true,
+  "inputs": {
+    "topic": "CrewAI 2.0 and multi-agent orchestration"
+  }
+}

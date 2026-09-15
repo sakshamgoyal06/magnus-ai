@@ -1,9 +1,15 @@
 .env
 __pycache__/
+*.py[cod]
 .DS_Store
 .venv/
-output/report.md
+.ruff_cache/
+.pytest_cache/
+.mypy_cache/
+htmlcov/
+.coverage
 *.egg-info/
 dist/
 build/
+output/
 agent-tools/

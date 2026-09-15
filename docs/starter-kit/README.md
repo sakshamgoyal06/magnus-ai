@@ -21,7 +21,12 @@ The build plan calls for additional living documents as implementation proceeds,
 - `PRODUCT_CONTRACT.md` (Day 1)
 - `ARCHITECTURE.md`, `DOMAIN_MODEL.md`, daily notes under `docs/daily/`
 
-Until those exist, the three files in this folder are the source of truth.
+Living docs created so far:
+
+- [PRODUCT_CONTRACT.md](../../PRODUCT_CONTRACT.md) (Day 1)
+- [ARCHITECTURE.md](../ARCHITECTURE.md) (Day 1)
+
+Until other planned docs exist, this starter kit plus those files are the source of truth.
 
 ## Cursor
 

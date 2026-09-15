@@ -1,28 +1,99 @@
 # Magnus (clean-room MVP)
 
-Adaptive personal intelligence system — **Telegram-first** 21-day MVP. This repository is a clean-room rebuild; product and engineering direction live in the starter kit, not in legacy Magnus repos.
+Adaptive personal intelligence system — **Telegram-first** 21-day MVP. Product direction lives in the [starter kit](docs/starter-kit/README.md); this repository is a clean-room implementation.
 
-**Repository:** [saksham-goyal/magnus-ai](https://origin.cursor.com/saksham-goyal/magnus-ai)  
-**Git remote (`origin`):** `https://origin.cursor.com/git/saksham-goyal/magnus-ai.git`
+**Repository:** [saksham-goyal/magnus-ai](https://origin.cursor.com/saksham-goyal/magnus-ai)
 
-## Starter kit (read this first)
+## Authoritative documents
 
 | Document | Path |
 |----------|------|
-| Core problem definition | [docs/starter-kit/CORE_PROBLEM.md](docs/starter-kit/CORE_PROBLEM.md) |
-| 21-day MVP build plan | [docs/starter-kit/MVP_BUILD_PLAN.md](docs/starter-kit/MVP_BUILD_PLAN.md) |
+| Core problem | [docs/starter-kit/CORE_PROBLEM.md](docs/starter-kit/CORE_PROBLEM.md) |
+| 21-day build plan | [docs/starter-kit/MVP_BUILD_PLAN.md](docs/starter-kit/MVP_BUILD_PLAN.md) |
 | Daily build gates | [docs/starter-kit/BUILD_GATES.md](docs/starter-kit/BUILD_GATES.md) |
-
-Index and usage: [docs/starter-kit/README.md](docs/starter-kit/README.md).
-
-## Project rules
-
-Cursor rules in [`.cursor/rules/`](.cursor/rules/) include clean-room constraints and mandatory reference to the starter kit.
+| Product contract | [PRODUCT_CONTRACT.md](PRODUCT_CONTRACT.md) |
+| Architecture | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) |
 
 ## Implementation status
 
-Day 1 foundation (FastAPI, PostgreSQL, Telegram `/start`, `PRODUCT_CONTRACT.md`, etc.) is defined in the build plan — not yet implemented in this repo.
+**Day 1 (foundation)** — FastAPI health check, PostgreSQL + Alembic, Telegram `/start` skeleton, tests, and development tooling.
 
-## Legacy scaffold note
+## Architecture tree
 
-An early [CrewAI](https://crewai.com) JSON-first sample (`crew.jsonc`, `agents/`) remains in the tree from initial project setup. It is **not** part of the Magnus MVP spec and will be replaced or removed as Magnus Day 1 work lands.
+See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
+
+## Prerequisites
+
+- Python **3.12+**
+- [uv](https://docs.astral.sh/uv/) (recommended) or `pip`
+- PostgreSQL **16** (local install or Docker)
+
+## Local setup
+
+### 1. PostgreSQL
+
+**Option A — Docker**
+
+```bash
+docker compose up -d db
+```
+
+**Option B — system PostgreSQL**
+
+Create role and database (adjust credentials to match `.env`):
+
+```bash
+createuser magnus -P   # password: magnus
+createdb magnus_dev -O magnus
+```
+
+### 2. Python environment
+
+```bash
+cp .env.example .env
+uv sync --extra dev
+```
+
+### 3. Migrations
+
+```bash
+uv run alembic upgrade head
+```
+
+### 4. Run the API (and optional Telegram bot)
+
+```bash
+uv run magnus-api
+```
+
+- Health: [http://localhost:8000/health](http://localhost:8000/health)
+- Set `TELEGRAM_BOT_TOKEN` in `.env` to enable long-polling for `/start`.
+
+## Tests
+
+```bash
+uv run pytest
+```
+
+Requires a reachable PostgreSQL instance at `DATABASE_URL` (default: `magnus_dev` on localhost).
+
+## Dependencies (Day 1)
+
+| Package | Role |
+|---------|------|
+| fastapi | HTTP API |
+| uvicorn | ASGI server |
+| sqlalchemy[asyncio] | ORM and async DB access |
+| asyncpg | Async PostgreSQL driver |
+| psycopg[binary] | Sync driver for Alembic |
+| alembic | Schema migrations |
+| pydantic-settings | Typed configuration from environment |
+| python-telegram-bot | Telegram adapter (`/start`) |
+| pytest, pytest-asyncio, httpx | Tests (dev extra) |
+| ruff | Lint/format (dev extra) |
+
+Intelligence providers are not wired on Day 1; see `magnus/intelligence/llm_provider.py`.
+
+## Project rules
+
+Cursor rules in [`.cursor/rules/`](.cursor/rules/) enforce clean-room constraints and starter-kit alignment.

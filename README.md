@@ -4,7 +4,7 @@ Adaptive personal intelligence system — **Telegram-first** 21-day MVP. Product
 
 **Repository:** [github.com/sakshamgoyal06/magnus-ai](https://github.com/sakshamgoyal06/magnus-ai)
 
-Clone, push, and pull use GitHub only. For Cursor Cloud Agents (web/phone) and secrets, see [docs/CURSOR_AND_GITHUB.md](docs/CURSOR_AND_GITHUB.md).
+For Cursor Cloud Agents and secrets, see [docs/CURSOR_AND_GITHUB.md](docs/CURSOR_AND_GITHUB.md).
 
 ## Authoritative documents
 

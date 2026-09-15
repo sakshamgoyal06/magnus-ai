@@ -71,6 +71,10 @@ uv run magnus-api
 - Health: [http://localhost:8000/health](http://localhost:8000/health)
 - Set `TELEGRAM_BOT_TOKEN` in `.env` to enable long-polling for `/start`.
 
+## Railway + Supabase
+
+Production database setup (Supabase Postgres + Railway env vars + migrations): [docs/DEPLOYMENT_RAILWAY_SUPABASE.md](docs/DEPLOYMENT_RAILWAY_SUPABASE.md).
+
 ## Tests
 
 ```bash

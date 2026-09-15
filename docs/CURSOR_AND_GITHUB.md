@@ -21,9 +21,9 @@ Use normal GitHub auth (`gh auth login`, SSH, or HTTPS credential manager). Push
 3. In **Cloud Agent environment** settings for this repo:
    - Link the **GitHub** repository `sakshamgoyal06/magnus-ai`.
    - Keep **`GITHUB_TOKEN`** (or rely on Cursor’s GitHub integration) so the agent can `git push`.
-4. New agents use `.cursor/environment.json` `install` to run `uv sync --extra dev`.
+4. New agents use `.cursor/environment.json` `install` to run `uv sync --extra dev` and, if needed, rewrite a stale `origin.cursor.com` remote to GitHub.
 
-If an old environment still points at `origin.cursor.com/.../magnus-ai`, create a **new** personal environment tied to the GitHub repo or update the environment’s repository URL in the dashboard so pushes land on GitHub only.
+If pushes still go to Cursor Origin, create a **new** personal environment tied to the GitHub repo or update the environment’s repository URL in the dashboard so the default remote is GitHub only.
 
 ## Secrets
 

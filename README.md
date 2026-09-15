@@ -2,7 +2,11 @@
 
 Adaptive personal intelligence system — **Telegram-first** 21-day MVP. Product direction lives in the [starter kit](docs/starter-kit/README.md); this repository is a clean-room implementation.
 
-**Repository:** [saksham-goyal/magnus-ai](https://origin.cursor.com/saksham-goyal/magnus-ai)
+**GitHub (canonical for you):** [sakshamgoyal06/magnus-ai](https://github.com/sakshamgoyal06/magnus-ai)
+
+**Cursor Origin (Cloud Agent default remote):** [saksham-goyal/magnus-ai](https://origin.cursor.com/saksham-goyal/magnus-ai)
+
+Cloud Agents push to `origin` (Origin) automatically. To mirror the same commits to GitHub from a Cloud Agent, set a `GITHUB_TOKEN` secret and run `./scripts/push-to-github.sh` (see script header).
 
 ## Authoritative documents
 

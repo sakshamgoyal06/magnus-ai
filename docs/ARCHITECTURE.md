@@ -25,8 +25,16 @@ docs/
 
 - **Telegram** handlers call **application** services; they do not import domain persistence directly.
 - **API** routes follow the same rule for future REST hooks.
-- **Intelligence** implements `LLMProvider`; application services depend on the interface, not a vendor SDK.
+- **Intelligence** holds a provisional `LLMProvider` infrastructure boundary (see below). Application/domain services own product logic; they may call an LLM where semantic reasoning is needed.
 - No “agent framework” or multi-agent shell in Day 1.
+
+## `LLMProvider` (provisional)
+
+`LLMProvider` is a provisional infrastructure boundary. Its current methods (`generate`, `extract_structured`, `reason`) are **not** part of the permanent Magnus domain contract and may be revised once concrete semantic use cases exist (Day 5+).
+
+Product intelligence must live in explicit application/domain services (e.g. future `TrajectoryService`, `AdherenceService`, `DiagnosisService`, `PriorityService`, `ReviewService`). Those services own deterministic logic; LLM calls are capabilities they use where needed. Structured validation must sit between LLM output and authoritative state mutation.
+
+`reason()` must **not** become a god-interface for trajectory, diagnosis, prioritization, review, or strategy logic. If the interface encourages that, redesign the provider when real use cases land.
 
 ## Runtime
 

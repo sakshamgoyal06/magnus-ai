@@ -6,15 +6,16 @@ Create Date: 2026-09-14
 
 """
 
-from typing import Sequence, Union
+from collections.abc import Sequence
 
 import sqlalchemy as sa
+
 from alembic import op
 
 revision: str = "20250914_0001"
-down_revision: Union[str, Sequence[str], None] = None
-branch_labels: Union[str, Sequence[str], None] = None
-depends_on: Union[str, Sequence[str], None] = None
+down_revision: str | Sequence[str] | None = None
+branch_labels: str | Sequence[str] | None = None
+depends_on: str | Sequence[str] | None = None
 
 
 def upgrade() -> None:
@@ -31,9 +32,7 @@ def upgrade() -> None:
         sa.PrimaryKeyConstraint("key"),
     )
     op.execute(
-        sa.text(
-            "INSERT INTO app_metadata (key, value) VALUES ('schema', 'day1_foundation')"
-        )
+        sa.text("INSERT INTO app_metadata (key, value) VALUES ('schema', 'day1_foundation')")
     )
 
 

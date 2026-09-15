@@ -16,6 +16,10 @@ Magnus is a clean-room MVP with a 21-day plan. Day 1 requires a reproducible Pyt
 - Minimal `app_metadata` table to prove migrations; no life-model schema until Day 2.
 - `LLMProvider` ABC in `intelligence/` with no concrete implementation on Day 1.
 
+### Provisional LLM boundary (Day 1)
+
+`LLMProvider` is a provisional infrastructure boundary. Its current methods are not part of the permanent Magnus domain contract and may be revised once concrete semantic use cases are implemented. Product intelligence must live in explicit application/domain services rather than a generic LLM reasoning method. `reason()` must not become a catch-all for trajectory, diagnosis, prioritization, review, or strategy logic.
+
 ## Consequences
 
 - Developers need PostgreSQL locally (package install or `docker compose up db`).

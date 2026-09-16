@@ -61,7 +61,7 @@ def run() -> None:
     uvicorn.run(
         "magnus.api.main:app",
         host="0.0.0.0",
-        port=8000,
+        port=settings.port,
         reload=settings.app_env == "development",
         log_level=settings.log_level.lower(),
     )

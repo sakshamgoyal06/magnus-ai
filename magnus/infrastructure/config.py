@@ -21,6 +21,7 @@ class Settings(BaseSettings):
     )
     app_env: str = Field(default="development", alias="APP_ENV")
     log_level: str = Field(default="INFO")
+    port: int = Field(default=8000, alias="PORT")
 
     @property
     def sync_database_url(self) -> str:

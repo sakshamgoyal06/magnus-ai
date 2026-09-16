@@ -8,6 +8,7 @@ from fastapi import FastAPI
 from magnus.api.routes.health import router as health_router
 from magnus.infrastructure.config import get_settings
 from magnus.infrastructure.database import create_engine, create_session_factory
+from magnus.infrastructure.startup import validate_production_settings
 from magnus.telegram.bot import build_telegram_application, run_telegram_polling
 
 logger = logging.getLogger(__name__)
@@ -16,6 +17,7 @@ logger = logging.getLogger(__name__)
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     settings = get_settings()
+    validate_production_settings(settings)
     engine = create_engine(settings)
     app.state.db_engine = engine
     app.state.session_factory = create_session_factory(engine)

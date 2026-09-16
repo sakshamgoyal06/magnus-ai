@@ -28,7 +28,10 @@ class Settings(BaseSettings):
         """Alembic uses a synchronous driver."""
         url = self.database_url
         if url.startswith("postgresql+asyncpg://"):
-            return url.replace("postgresql+asyncpg://", "postgresql+psycopg://", 1)
+            url = url.replace("postgresql+asyncpg://", "postgresql+psycopg://", 1)
+        if "supabase.co" in url and "sslmode=" not in url:
+            separator = "&" if "?" in url else "?"
+            url = f"{url}{separator}sslmode=require"
         return url
 
 

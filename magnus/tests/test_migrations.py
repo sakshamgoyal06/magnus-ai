@@ -2,7 +2,7 @@ import subprocess
 import sys
 
 
-def test_alembic_current_shows_head():
+def test_alembic_current_shows_head(db_migrated):
     result = subprocess.run(
         [sys.executable, "-m", "alembic", "current"],
         capture_output=True,

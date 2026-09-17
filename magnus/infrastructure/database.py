@@ -1,7 +1,5 @@
-import ssl
 from collections.abc import AsyncGenerator
 
-import certifi
 from sqlalchemy import text
 from sqlalchemy.ext.asyncio import (
     AsyncEngine,
@@ -21,9 +19,8 @@ class Base(DeclarativeBase):
 def _async_connect_args(database_url: str) -> dict:
     lowered = database_url.lower()
     if "supabase.co" in lowered or "pooler.supabase.com" in lowered or "ssl=require" in lowered:
-        # Railway/minimal images may lack CA bundles; certifi matches Supabase pooler chains.
-        ctx = ssl.create_default_context(cafile=certifi.where())
-        return {"ssl": ctx}
+        # asyncpg SSLMode "require": TLS without CA verify (avoids Railway CA-chain failures).
+        return {"ssl": "require"}
     return {}
 
 

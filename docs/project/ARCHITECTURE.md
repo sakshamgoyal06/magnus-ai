@@ -1,6 +1,6 @@
 # Magnus architecture (Day 1 foundation)
 
-Infrastructure ownership (GitHub, Railway, database host, Telegram transport, env vars) is defined in [SOURCE_OF_TRUTH.md](SOURCE_OF_TRUTH.md). This file describes module layout. If the two disagree on infrastructure, SOURCE_OF_TRUTH wins.
+Infrastructure ownership (GitHub, Railway, database host, Telegram transport, env vars) is defined in [SOURCE_OF_TRUTH.md](SOURCE_OF_TRUTH.md). This file describes module layout. If the two disagree on infrastructure, SOURCE_OF_TRUTH wins. Build handoff: [CURRENT_STATE.md](CURRENT_STATE.md).
 
 ## Module tree
 
@@ -20,9 +20,9 @@ magnus/
 supabase/
     migrations/       # Authoritative schema history (ADR 0002)
 docs/
-    SOURCE_OF_TRUTH.md
-    starter-kit/      # Product spec (authoritative)
+    project/          # Canonical product, build, infra docs
     adr/              # Architecture decision records
+    daily/            # Build-day records
 ```
 
 ## Boundaries
@@ -51,5 +51,5 @@ Product intelligence must live in explicit application/domain services (e.g. fut
 
 ## ADRs
 
-- [0001-day1-foundation.md](adr/0001-day1-foundation.md)
-- [0002-supabase-persistence-and-migrations.md](adr/0002-supabase-persistence-and-migrations.md)
+- [0001-day1-foundation.md](../adr/0001-day1-foundation.md)
+- [0002-supabase-persistence-and-migrations.md](../adr/0002-supabase-persistence-and-migrations.md)

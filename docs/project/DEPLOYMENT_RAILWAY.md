@@ -1,6 +1,6 @@
 # Deploy Magnus on Railway
 
-Canonical infrastructure facts live in [SOURCE_OF_TRUTH.md](SOURCE_OF_TRUTH.md). Schema workflow: [SUPABASE_MIGRATIONS.md](SUPABASE_MIGRATIONS.md).
+Canonical infrastructure facts live in [SOURCE_OF_TRUTH.md](SOURCE_OF_TRUTH.md). Schema workflow: [SUPABASE_MIGRATIONS.md](SUPABASE_MIGRATIONS.md). Handoff: [CURRENT_STATE.md](CURRENT_STATE.md).
 
 Magnus on Railway is a **single Python service**: FastAPI (health + future HTTP) and **Telegram long-polling** in one process (`magnus.api.main` lifespan). PostgreSQL is **external** (Supabase project `magnus-ai` only). **Railway does not run migrations.**
 
@@ -113,4 +113,4 @@ docker compose up -d db   # optional local Postgres for tests
 uv run magnus-api
 ```
 
-See [docs/ARCHITECTURE.md](ARCHITECTURE.md) for module boundaries.
+See [ARCHITECTURE.md](ARCHITECTURE.md) for module boundaries.

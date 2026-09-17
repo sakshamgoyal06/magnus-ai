@@ -86,7 +86,7 @@ Do not proceed if:
 - old Magnus code was not copied into domain architecture
 - application starts from documented command
 - PostgreSQL connection works
-- migrations framework works (`supabase/migrations/`; apply via Supabase CLI — see `docs/SUPABASE_MIGRATIONS.md`)
+- migrations framework works (`supabase/migrations/`; apply via Supabase CLI — see `docs/project/SUPABASE_MIGRATIONS.md`)
 - FastAPI health endpoint works
 - Telegram `/start` works
 - secrets are excluded from version control
@@ -104,7 +104,7 @@ Repository structure matches documented architecture.
 
 `CORE_PROBLEM.md` and `PRODUCT_CONTRACT.md` are present and treated as authoritative.
 
-`docs/SOURCE_OF_TRUTH.md` is present and treated as authoritative for infrastructure (GitHub, Railway, Supabase, `supabase/migrations/`, Telegram hosting, env var names).
+`docs/project/SOURCE_OF_TRUTH.md` is present and treated as authoritative for infrastructure (GitHub, Railway, Supabase, `supabase/migrations/`, Telegram hosting, env var names).
 
 ## Test
 

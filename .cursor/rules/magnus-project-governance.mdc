@@ -1,0 +1,67 @@
+---
+alwaysApply: true
+---
+
+# Magnus project governance
+
+## Before every build day
+
+Read:
+
+- `docs/project/CORE_PROBLEM.md`
+- `docs/project/PRODUCT_CONTRACT.md`
+- `docs/project/SOURCE_OF_TRUTH.md`
+- `docs/project/ARCHITECTURE.md`
+- `docs/project/BUILD_GATES.md`
+- `docs/project/MVP_BUILD_PLAN.md`
+- `docs/project/DECISION_LOG.md`
+- `docs/project/OPEN_QUESTIONS.md`
+- `docs/project/CURRENT_STATE.md`
+- relevant accepted ADRs in `docs/adr/`
+- previous `docs/daily/day-XX.md`
+
+Before implementation, state:
+
+1. today's objective
+2. assumptions inherited from prior build days
+3. files/modules expected to change
+4. what explicitly will NOT be built
+5. unresolved questions that could block implementation
+
+Do not silently answer an open product or architecture question.
+
+## During implementation
+
+Follow Magnus principles from `CORE_PROBLEM.md` and `PRODUCT_CONTRACT.md`: simplicity, intelligence over tracking, evidence over confidence, deterministic logic where possible, LLM only where semantic judgment adds value, never silently mutate authoritative state, preserve facts vs inference and uncertainty.
+
+Do not expand scope beyond the active build day in `MVP_BUILD_PLAN.md`.
+
+## Foundational document protection
+
+Never silently modify `CORE_PROBLEM.md`, `PRODUCT_CONTRACT.md`, `SOURCE_OF_TRUTH.md`, `BUILD_GATES.md`, or `MVP_BUILD_PLAN.md` to match code you just wrote.
+
+Direction of truth: **accepted decision → canonical documentation → implementation**.
+
+If implementation suggests a foundational assumption may be wrong: add to `OPEN_QUESTIONS.md`; do not change contracts without explicit approval.
+
+## Architecture and source of truth updates
+
+- Update `ARCHITECTURE.md` only when architecture actually changes.
+- Update `SOURCE_OF_TRUTH.md` only when infrastructure ownership or runtime reality changes.
+
+## Decisions and open questions
+
+- Accepted decision → compact entry in `DECISION_LOG.md`; ADR if significant.
+- Unresolved → `OPEN_QUESTIONS.md`; do not freeze by silent code choice.
+
+## After every build day
+
+Update: `docs/daily/day-XX.md`, `CURRENT_STATE.md`, `CHANGELOG.md`, `OPEN_QUESTIONS.md` as needed, `DECISION_LOG.md` only for accepted decisions.
+
+Produce a documentation manifest (docs read/changed, ADRs, decisions, open questions, assumptions for next day, provisional items). Do not auto-start the next build day.
+
+## Release gate
+
+Run the matching gate in `docs/project/BUILD_GATES.md`. Return PASS, PASS WITH DEBT, or FAIL. Do not proceed unless the gate permits.
+
+Do not scope from deprecated Magnus codebases; only this repo and canonical docs.

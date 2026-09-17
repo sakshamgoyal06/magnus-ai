@@ -1,6 +1,6 @@
 # Magnus — Product Contract
 
-Authoritative product constraints for the Magnus MVP. Engineering and intelligence work must align with this document and with [docs/starter-kit/CORE_PROBLEM.md](docs/starter-kit/CORE_PROBLEM.md).
+Authoritative product constraints for the Magnus MVP. Engineering and intelligence work must align with this document and with [CORE_PROBLEM.md](CORE_PROBLEM.md).
 
 ## Problem statement
 
@@ -74,5 +74,5 @@ Execution success is not the same as outcome success.
 
 - Domain and application logic stay independent of Telegram and LLM vendors.
 - The LLM assists reasoning; it does not silently own authoritative state.
-- See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for repository layout.
-- See [docs/SOURCE_OF_TRUTH.md](docs/SOURCE_OF_TRUTH.md) for infrastructure ownership (GitHub, Railway, database, Telegram).
+- See [ARCHITECTURE.md](ARCHITECTURE.md) for repository layout.
+- See [SOURCE_OF_TRUTH.md](SOURCE_OF_TRUTH.md) for infrastructure ownership (GitHub, Railway, database, Telegram).

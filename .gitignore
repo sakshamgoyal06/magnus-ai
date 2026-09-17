@@ -13,3 +13,7 @@ dist/
 build/
 output/
 agent-tools/
+
+# Supabase CLI local state
+supabase/.temp/
+supabase/.branches/

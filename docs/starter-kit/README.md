@@ -25,8 +25,11 @@ Living docs created so far:
 
 - [PRODUCT_CONTRACT.md](../../PRODUCT_CONTRACT.md) (Day 1)
 - [ARCHITECTURE.md](../ARCHITECTURE.md) (Day 1)
+- [SOURCE_OF_TRUTH.md](../SOURCE_OF_TRUTH.md) (Day 1 — infrastructure ownership)
+- [SUPABASE_MIGRATIONS.md](../SUPABASE_MIGRATIONS.md) (schema workflow)
+- [adr/0002-supabase-persistence-and-migrations.md](../adr/0002-supabase-persistence-and-migrations.md)
 
-Until other planned docs exist, this starter kit plus those files are the source of truth.
+Product authority: this starter kit plus `PRODUCT_CONTRACT.md`. Infrastructure authority: `docs/SOURCE_OF_TRUTH.md`. Stack in `MVP_BUILD_PLAN.md` §8 still mentions Alembic historically; **ADR 0002** is authoritative for migrations (Supabase only).
 
 ## Cursor
 

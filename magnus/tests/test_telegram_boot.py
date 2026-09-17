@@ -35,9 +35,7 @@ async def test_lifespan_starts_telegram_when_token_configured():
         settings.app_env = "test"
         settings.log_level = "INFO"
         settings.port = 8000
-        settings.database_url = (
-            "postgresql+asyncpg://magnus:magnus@localhost:5432/magnus_dev"
-        )
+        settings.database_url = "postgresql+asyncpg://magnus:magnus@localhost:5432/magnus_dev"
         settings_mock.return_value = settings
 
         app = create_app()

@@ -75,3 +75,4 @@ Execution success is not the same as outcome success.
 - Domain and application logic stay independent of Telegram and LLM vendors.
 - The LLM assists reasoning; it does not silently own authoritative state.
 - See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for repository layout.
+- See [docs/SOURCE_OF_TRUTH.md](docs/SOURCE_OF_TRUTH.md) for infrastructure ownership (GitHub, Railway, database, Telegram).

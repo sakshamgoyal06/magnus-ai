@@ -1,0 +1,23 @@
+# Magnus V2 — Supabase project link (schema authority: supabase/migrations/)
+# Link locally: supabase link --project-ref uktsxijrewbqjcjnrfdv
+
+project_id = "uktsxijrewbqjcjnrfdv"
+
+[db]
+port = 5432
+major_version = 17
+
+[api]
+enabled = false
+
+[studio]
+enabled = true
+
+[realtime]
+enabled = false
+
+[storage]
+enabled = false
+
+[auth]
+enabled = false

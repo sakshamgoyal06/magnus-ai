@@ -15,6 +15,12 @@ def validate_production_settings(settings: Settings) -> None:
         )
 
     db_url = settings.database_url.lower()
+    if "+asyncpg" not in db_url:
+        raise RuntimeError(
+            "DATABASE_URL must use the asyncpg driver (postgresql+asyncpg://). "
+            "Plain postgresql:// is normalized at startup; if you still see this, "
+            "check DATABASE_URL in Railway variables."
+        )
     if any(marker in db_url for marker in _LOCAL_DB_MARKERS):
         raise RuntimeError(
             "DATABASE_URL must not point at localhost when APP_ENV=production. "

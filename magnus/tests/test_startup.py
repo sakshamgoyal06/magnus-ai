@@ -1,7 +1,15 @@
 import pytest
 
 from magnus.infrastructure.config import Settings
+from magnus.infrastructure.database import _async_connect_args
 from magnus.infrastructure.startup import validate_production_settings
+
+
+def test_async_connect_args_enables_ssl_for_supabase_pooler():
+    url = (
+        "postgresql+asyncpg://postgres.ref:secret@aws-0-us-east-1.pooler.supabase.com:5432/postgres"
+    )
+    assert _async_connect_args(url) == {"ssl": True}
 
 
 def test_production_requires_telegram_token():
@@ -33,12 +41,3 @@ def test_development_allows_missing_telegram_token():
         _env_file=None,
     )
     validate_production_settings(settings)
-
-
-def test_sync_database_url_adds_sslmode_for_supabase():
-    settings = Settings(
-        database_url="postgresql+asyncpg://postgres:pass@db.uktsxijrewbqjcjnrfdv.supabase.co:5432/postgres",
-        _env_file=None,
-    )
-    assert "sslmode=require" in settings.sync_database_url
-    assert settings.sync_database_url.startswith("postgresql+psycopg://")

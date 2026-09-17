@@ -4,6 +4,8 @@ Magnus uses **one** Git remote: GitHub.
 
 **Repository:** https://github.com/sakshamgoyal06/magnus-ai
 
+Infrastructure authority: [SOURCE_OF_TRUTH.md](SOURCE_OF_TRUTH.md).
+
 ## Local (desktop or laptop)
 
 ```bash

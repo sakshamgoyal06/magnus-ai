@@ -18,7 +18,7 @@ class Base(DeclarativeBase):
 
 def _async_connect_args(database_url: str) -> dict:
     lowered = database_url.lower()
-    if "supabase.co" in lowered or "ssl=require" in lowered:
+    if "supabase.co" in lowered or "pooler.supabase.com" in lowered or "ssl=require" in lowered:
         return {"ssl": True}
     return {}
 

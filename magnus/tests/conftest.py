@@ -13,8 +13,8 @@ os.environ.setdefault(
 os.environ.pop("TELEGRAM_BOT_TOKEN", None)
 
 
-@pytest.fixture(scope="session", autouse=True)
-def apply_migrations() -> None:
+@pytest.fixture(scope="session")
+def db_migrated() -> None:
     result = subprocess.run(
         [sys.executable, "-m", "alembic", "upgrade", "head"],
         capture_output=True,
@@ -30,7 +30,7 @@ def apply_migrations() -> None:
 
 
 @pytest.fixture
-async def api_client():
+async def api_client(db_migrated):
     from magnus.api.main import create_app
 
     app = create_app()

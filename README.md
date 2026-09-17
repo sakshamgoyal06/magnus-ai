@@ -71,6 +71,10 @@ uv run magnus-api
 - Health: [http://localhost:8000/health](http://localhost:8000/health)
 - Set `TELEGRAM_BOT_TOKEN` in `.env` to enable long-polling for `/start`.
 
+## Railway deployment
+
+See [docs/DEPLOYMENT_RAILWAY.md](docs/DEPLOYMENT_RAILWAY.md) for required variables, Supabase `DATABASE_URL`, migrations, and Telegram replica constraints.
+
 ## Tests
 
 ```bash

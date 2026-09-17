@@ -13,3 +13,9 @@ def test_sync_database_url_converts_async_driver():
         _env_file=None,
     )
     assert settings.sync_database_url == "postgresql+psycopg://user:pass@localhost/db"
+
+
+def test_port_reads_from_port_env(monkeypatch):
+    monkeypatch.setenv("PORT", "3000")
+    settings = Settings(_env_file=None)
+    assert settings.port == 3000

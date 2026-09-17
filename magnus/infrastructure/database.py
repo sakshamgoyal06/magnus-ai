@@ -16,9 +16,20 @@ class Base(DeclarativeBase):
     pass
 
 
+def _async_connect_args(database_url: str) -> dict:
+    lowered = database_url.lower()
+    if "supabase.co" in lowered or "ssl=require" in lowered:
+        return {"ssl": True}
+    return {}
+
+
 def create_engine(settings: Settings | None = None) -> AsyncEngine:
     cfg = settings or get_settings()
-    return create_async_engine(cfg.database_url, pool_pre_ping=True)
+    return create_async_engine(
+        cfg.database_url,
+        pool_pre_ping=True,
+        connect_args=_async_connect_args(cfg.database_url),
+    )
 
 
 def create_session_factory(engine: AsyncEngine) -> async_sessionmaker[AsyncSession]:

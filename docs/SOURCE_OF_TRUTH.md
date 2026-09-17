@@ -63,7 +63,7 @@ GitHub repository → supabase/migrations/
 ```
 
 - **`supabase/config.toml`** links CLI to project `uktsxijrewbqjcjnrfdv`.
-- Day 1 baseline: `supabase/migrations/20260917000000_day1_baseline.sql` (no application DDL).
+- Day 1 baseline: `supabase/migrations/20260917051947_day1_baseline.sql` (no application DDL; hosted version `20260917051947`).
 - Apply to hosted DB: Supabase CLI `supabase db push` (see [SUPABASE_MIGRATIONS.md](SUPABASE_MIGRATIONS.md)). **Railway does not run migrations.**
 - Dashboard schema editing is not the normal workflow.
 
@@ -130,15 +130,28 @@ Telegram Bot API
 | Layout | `docs/ARCHITECTURE.md` |
 | Migrations decision | `docs/adr/0002-supabase-persistence-and-migrations.md` |
 | Railway runbook | `docs/DEPLOYMENT_RAILWAY.md` |
+| Day 1 audit / handoff | `docs/DAY_1_AUDIT.md` |
 
 ---
 
-## 11. Manual verification checklist
+## 11. Day 1 foundation status
+
+Verified against hosted Supabase project `uktsxijrewbqjcjnrfdv` (2026-09-18):
+
+- Migration history contains version **`20260917051947`**, name **`day1_baseline`** (matches git `supabase/migrations/20260917051947_day1_baseline.sql`).
+- **`public`** has **no Magnus application tables** (manual probe table removed; Day 2 DDL starts clean).
+- Production **`GET /health`** returned **`database: connected`** (re-check after deploys).
+
+Day 2 may add new files under `supabase/migrations/` and domain code under `magnus/domain/` and `magnus/repositories/` without revisiting Day 1 infra choices.
+
+---
+
+## 12. Manual verification checklist
 
 - [ ] Railway project/service connected to GitHub `sakshamgoyal06/magnus-ai`, branch `main`, auto-deploy
 - [ ] Railway **one** replica; deploy health path `/health/live`
 - [ ] Railway vars: `DATABASE_URL` → Supabase session pooler, `TELEGRAM_BOT_TOKEN`, `APP_ENV=production`
-- [ ] `supabase db push` applied; migration history includes `20260917000000_day1_baseline`
-- [ ] Supabase `public` has no Day 2 domain tables
+- [x] `supabase db push` applied; migration history includes `20260917051947` / `day1_baseline`
+- [x] Supabase `public` has no Day 2 domain tables (no Magnus DDL in `public`)
 - [ ] Telegram `/start` works against production bot
-- [ ] Live `GET /health` → 200, `database: connected`
+- [x] Live `GET /health` → 200, `database: connected` (last verified 2026-09-18; re-check after changes)

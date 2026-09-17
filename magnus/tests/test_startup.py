@@ -6,10 +6,13 @@ from magnus.infrastructure.startup import validate_production_settings
 
 
 def test_async_connect_args_enables_ssl_for_supabase_pooler():
+    import ssl
+
     url = (
         "postgresql+asyncpg://postgres.ref:secret@aws-0-us-east-1.pooler.supabase.com:5432/postgres"
     )
-    assert _async_connect_args(url) == {"ssl": True}
+    args = _async_connect_args(url)
+    assert isinstance(args.get("ssl"), ssl.SSLContext)
 
 
 def test_production_requires_telegram_token():

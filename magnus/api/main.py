@@ -21,6 +21,8 @@ async def lifespan(app: FastAPI):
     engine = create_engine(settings)
     app.state.db_engine = engine
     app.state.session_factory = create_session_factory(engine)
+    logger.info("Database driver: %s", engine.url.drivername)
+    logger.info("Database host: %s", engine.url.host)
 
     polling_task: asyncio.Task | None = None
     if settings.telegram_bot_token:

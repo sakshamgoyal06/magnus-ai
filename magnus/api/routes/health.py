@@ -7,6 +7,12 @@ from magnus.infrastructure.database import check_database_connection
 router = APIRouter(tags=["health"])
 
 
+@router.get("/health/live")
+async def health_live() -> JSONResponse:
+    """Process liveness for Railway deploy gate (no database check)."""
+    return JSONResponse(content={"status": "ok"})
+
+
 def _database_host(engine: AsyncEngine) -> str | None:
     try:
         return engine.url.host

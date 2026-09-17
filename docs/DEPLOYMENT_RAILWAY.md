@@ -20,7 +20,7 @@ Empty packages (`domain/`, `repositories/`, `jobs/`, …) are Day 2+ placeholder
 ## Config in this repository
 
 - **`railpack.json`** — `deploy.startCommand`.
-- **`railway.toml`** — `startCommand`, `healthcheckPath=/health` (no pre-deploy migration command).
+- **`railway.toml`** — `startCommand`, `healthcheckPath=/health/live` (no pre-deploy migration command).
 
 Railway injects **`PORT`**; the app reads it via settings (default 8000 locally).
 
@@ -74,12 +74,12 @@ When `APP_ENV=production`, the app **refuses to start** if:
 2. From a trusted environment: `supabase link --project-ref uktsxijrewbqjcjnrfdv` then `supabase db push`.
 3. Push to the branch Railway tracks (`main`).
 4. Railway **start only:** `uv run uvicorn magnus.api.main:app --host 0.0.0.0 --port $PORT`
-5. Railway health check: `GET /health` (DB `SELECT 1`).
+5. Railway deploy health check: `GET /health/live` (process up only). After deploy, verify `GET /health` (includes DB `SELECT 1`).
 
 ## Telegram on Railway
 
 - **Mode:** long-polling (`python-telegram-bot`), not webhooks.
-- **Replicas:** keep **one replica**. Multiple instances will fight over the same bot token.
+- **Replicas:** keep **one replica**. During a deploy, Railway may briefly run **old + new** containers; both may poll until the old one stops → `telegram.error.Conflict` in logs. That does **not** cause `/health` 503 (DB check is separate). Conflicts should stop once only one replica remains.
 - **Behavior today:** `/start` returns the welcome message from `application.start`. No chat persistence until later build days.
 
 ## Post-deploy verification
@@ -95,8 +95,14 @@ When `APP_ENV=production`, the app **refuses to start** if:
 | Build: `No start command detected` | Missing `railpack.json` / wrong builder (use Railpack). |
 | Crash on boot: `TELEGRAM_BOT_TOKEN is required` | Token not set or `APP_ENV` not `production` mismatch. |
 | App crash `No module named psycopg2` | `DATABASE_URL` used plain `postgresql://` on an old deploy. Redeploy latest code (URL normalization) or set `postgresql+asyncpg://…`. |
-| `/health` 503 | Wrong `DATABASE_URL`, SSL, or database unreachable. |
+| Deploy fails health check | Was `/health` 503 (DB). Deploy gate uses `/health/live` (always 200 if Uvicorn bound). |
+| `/health` 503 | Wrong `DATABASE_URL`, SSL, or database unreachable (fix pooler URL; bot can still run). |
+| `telegram.error.Conflict` during deploy | Overlapping deploy instances or local bot + Railway; not a health-check failure. |
 | API healthy, bot silent | Token missing/wrong, or scaled to >1 replica. |
+
+### Disable Railway health checks entirely
+
+Remove `healthcheckPath` and `healthcheckTimeout` from `railway.toml` (or clear the health check path in the Railway service **Settings**). Deployments will mark success when the container starts, without probing HTTP. You lose automatic rollback when the process crashes after boot; keep using `GET /health` manually for DB verification.
 
 ## Local parity
 

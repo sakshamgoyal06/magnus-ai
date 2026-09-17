@@ -1,0 +1,15 @@
+---
+alwaysApply: true
+---
+
+# Magnus — read CURRENT_STATE first
+
+Before **any** build-day work, planning, audit, refactor, or feature implementation in this repository:
+
+1. **Read `docs/project/CURRENT_STATE.md` first** — completely — before opening other project docs or writing code.
+2. Summarize in your reply: completed build day, stable foundations, open blockers, and what the next build day may / must not assume (from that file).
+3. Then read the rest of the build-day pack as required by `magnus-project-governance.mdc` (gates, plan, open questions, prior `docs/daily/day-XX.md`, ADRs).
+
+If `CURRENT_STATE.md` conflicts with chat memory or older paths, **`CURRENT_STATE.md` wins** until the user explicitly approves updating it.
+
+Do not start implementation until step 1–2 are done.

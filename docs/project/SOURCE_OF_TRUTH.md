@@ -123,6 +123,8 @@ Not used by `magnus-api`: `SUPABASE_URL`, `SUPABASE_ANON_KEY`, `OPENAI_API_KEY`.
 
 ## 8. Documentation pack (review / handoff)
 
+**Cursor and humans:** read `docs/project/CURRENT_STATE.md` **first** before every build day (see `.cursor/rules/magnus-current-state-first.mdc`).
+
 Before or after each build day, share:
 
 - `docs/project/CURRENT_STATE.md`

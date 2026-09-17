@@ -10,7 +10,7 @@ Canonical paths moved to `docs/project/`. When planning or implementing MVP work
 - `docs/project/MVP_BUILD_PLAN.md` — 21-day scope, daily objectives, non-goals
 - `docs/project/BUILD_GATES.md` — per-day PASS/FAIL criteria
 
-Infrastructure: `docs/project/SOURCE_OF_TRUTH.md`. Handoff: `docs/project/CURRENT_STATE.md`.
+**Always read first:** `docs/project/CURRENT_STATE.md`. Infrastructure: `docs/project/SOURCE_OF_TRUTH.md`.
 
 Also follow `.cursor/rules/magnus-project-governance.mdc`.
 

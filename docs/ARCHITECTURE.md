@@ -46,9 +46,10 @@ Product intelligence must live in explicit application/domain services (e.g. fut
 - `magnus-api` (or `uv run magnus-api`) starts Uvicorn with FastAPI.
 - Optional `TELEGRAM_BOT_TOKEN` starts python-telegram-bot **long-polling** in the app lifespan. Production must run **one** polling instance.
 - PostgreSQL is required for `/health`. Application code uses generic `DATABASE_URL` (SQLAlchemy async + asyncpg). Production database is **Supabase PostgreSQL**; optional local Docker `magnus_dev` for dev/tests.
-- Schema authority: **`supabase/migrations/`** (Alembic superseded by ADR 0002). Day 1 has no application tables; connectivity uses `SELECT 1`.
+- Schema authority: **`supabase/migrations/`** (ADR 0002). Day 1 has no application tables; connectivity uses `SELECT 1`.
+- Supabase hosts: TLS via asyncpg `ssl=require` for `*.supabase.co` and `*.pooler.supabase.com` (see `magnus/infrastructure/database.py`).
 
 ## ADRs
 
-- [0001-day1-foundation.md](adr/0001-day1-foundation.md) (accepted; migration portions superseded)
-- [0002-supabase-persistence-and-migrations.md](adr/0002-supabase-persistence-and-migrations.md) (accepted)
+- [0001-day1-foundation.md](adr/0001-day1-foundation.md)
+- [0002-supabase-persistence-and-migrations.md](adr/0002-supabase-persistence-and-migrations.md)

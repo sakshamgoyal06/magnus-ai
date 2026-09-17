@@ -1,4 +1,4 @@
-# Magnus V2 — Source of Truth
+# Magnus — Source of Truth
 
 ## Purpose
 
@@ -7,8 +7,6 @@ This file defines the **authoritative systems** for Magnus infrastructure and de
 If another document conflicts with this file on **infrastructure ownership**, this document wins unless an accepted ADR explicitly supersedes it.
 
 Product philosophy: `docs/starter-kit/CORE_PROBLEM.md` and `PRODUCT_CONTRACT.md`.
-
-Reconciled for final Day 1 infrastructure (Supabase migrations, Alembic removed). Verified against repository contents and Supabase project `magnus-ai` (`uktsxijrewbqjcjnrfdv`).
 
 ---
 
@@ -37,7 +35,8 @@ Reconciled for final Day 1 infrastructure (Supabase migrations, Alembic removed)
 - **Railway** is the production runtime.
 - One Python service: FastAPI + Telegram long-polling (`magnus.api.main`).
 - Start command (repo): `uv run uvicorn magnus.api.main:app --host 0.0.0.0 --port $PORT`
-- Health: `GET /health`
+- Deploy health (Railway): `GET /health/live`
+- Operational health (DB): `GET /health`
 - **Exactly one** production replica while polling is active.
 
 `REQUIRES MANUAL VERIFICATION: Railway project/service name, GitHub connection, branch, auto-deploy, replica count`
@@ -49,12 +48,11 @@ Reconciled for final Day 1 infrastructure (Supabase migrations, Alembic removed)
 - **Supabase PostgreSQL** is the only production database.
 - Project name: **`magnus-ai`**
 - Project ref: **`uktsxijrewbqjcjnrfdv`**
-- Host: `db.uktsxijrewbqjcjnrfdv.supabase.co`
-- Application access: generic **`DATABASE_URL`** (SQLAlchemy 2.x async + **asyncpg**). No Supabase SDK in application code.
+- Application access: **`DATABASE_URL`** (SQLAlchemy 2.x async + **asyncpg**). No Supabase SDK in application code.
 - Day 1: **no Magnus application tables** in `public`; `/health` uses `SELECT 1`.
 - Local optional: Docker Postgres `magnus_dev` for tests only — not production.
 
-`REQUIRES MANUAL VERIFICATION: Railway DATABASE_URL points at this Supabase project`
+`REQUIRES MANUAL VERIFICATION: Railway DATABASE_URL uses Supabase session pooler for this project`
 
 ---
 
@@ -67,10 +65,7 @@ GitHub repository → supabase/migrations/
 - **`supabase/config.toml`** links CLI to project `uktsxijrewbqjcjnrfdv`.
 - Day 1 baseline: `supabase/migrations/20260917000000_day1_baseline.sql` (no application DDL).
 - Apply to hosted DB: Supabase CLI `supabase db push` (see [SUPABASE_MIGRATIONS.md](SUPABASE_MIGRATIONS.md)). **Railway does not run migrations.**
-- **Alembic is superseded** (ADR 0002). Not active in repo or Railway config.
 - Dashboard schema editing is not the normal workflow.
-
-**Orphan reconciliation (2026-09-17):** Removed hosted history row `chat_records_only` (`20260915053329`) — pre–V2 experiment, not in git, table absent. After you run `supabase db push`, remote history should include the Day 1 baseline from git.
 
 ---
 
@@ -131,32 +126,19 @@ Telegram Bot API
 | Schema workflow | `docs/SUPABASE_MIGRATIONS.md` |
 | Product | `docs/starter-kit/CORE_PROBLEM.md`, `PRODUCT_CONTRACT.md` |
 | Build gates | `docs/starter-kit/BUILD_GATES.md` |
-| Build plan | `docs/starter-kit/MVP_BUILD_PLAN.md` (product; stack notes superseded by ADR 0002 for infra) |
+| Build plan | `docs/starter-kit/MVP_BUILD_PLAN.md` |
 | Layout | `docs/ARCHITECTURE.md` |
 | Migrations decision | `docs/adr/0002-supabase-persistence-and-migrations.md` |
 | Railway runbook | `docs/DEPLOYMENT_RAILWAY.md` |
 
 ---
 
-## 11. Explicitly deprecated / superseded
-
-- Cursor Origin remote (`origin.cursor.com`)
-- **Alembic** (`alembic/`, `alembic.ini`, Railway Alembic pre-deploy)
-- **`app_metadata` probe table** (removed with Alembic)
-- Railway Postgres as production DB
-- Suggested repo name `magnus-core` (never the GitHub remote)
-- CrewAI scaffold; hosted Supabase project **CrewAI** (not Magnus V2)
-- Orphan migration `chat_records_only` on hosted Supabase (removed from history)
-- Webhooks as current Telegram mode
-
----
-
-## 12. Manual verification checklist
+## 11. Manual verification checklist
 
 - [ ] Railway project/service connected to GitHub `sakshamgoyal06/magnus-ai`, branch `main`, auto-deploy
-- [ ] Railway **one** replica; health path `/health`
-- [ ] Railway vars: `DATABASE_URL` → Supabase `magnus-ai`, `TELEGRAM_BOT_TOKEN`, `APP_ENV=production`; no Railway Postgres URL
+- [ ] Railway **one** replica; deploy health path `/health/live`
+- [ ] Railway vars: `DATABASE_URL` → Supabase session pooler, `TELEGRAM_BOT_TOKEN`, `APP_ENV=production`
 - [ ] `supabase db push` applied; migration history includes `20260917000000_day1_baseline`
 - [ ] Supabase `public` has no Day 2 domain tables
-- [ ] Telegram token is Magnus V2 bot; `/start` works
-- [ ] Live `/health` → 200, database connected
+- [ ] Telegram `/start` works against production bot
+- [ ] Live `GET /health` → 200, `database: connected`

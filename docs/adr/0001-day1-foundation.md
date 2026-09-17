@@ -2,28 +2,19 @@
 
 ## Status
 
-Accepted (Day 1) — **partially superseded** for database migrations by [0002-supabase-persistence-and-migrations.md](0002-supabase-persistence-and-migrations.md)
+Accepted (Day 1)
 
 ## Context
 
-Magnus is a clean-room MVP with a 21-day plan. Day 1 requires a reproducible Python service, PostgreSQL, migrations, health checks, and a Telegram `/start` path without intelligence or domain modelling yet.
+Magnus is a clean-room MVP with a 21-day plan. Day 1 requires a reproducible Python service, PostgreSQL, schema history in git, health checks, and a Telegram `/start` path without intelligence or domain modelling yet.
 
 ## Decision
 
 - **Python 3.12+**, **FastAPI**, **SQLAlchemy 2.x (async)**, **Pydantic Settings**, **python-telegram-bot**, **pytest**.
 - Package layout under `magnus/` with explicit `telegram/` adapter and empty `domain/` for Day 2.
 - Async runtime DB URL (`postgresql+asyncpg://`).
+- Schema authority: `supabase/migrations/` on Supabase PostgreSQL ([ADR 0002](0002-supabase-persistence-and-migrations.md)).
 - `LLMProvider` ABC in `intelligence/` with no concrete implementation on Day 1.
-
-### Superseded by ADR 0002 (historical record)
-
-The following were part of the initial Day 1 decision but are **no longer active**:
-
-- **Alembic** for schema migrations
-- Sync `postgresql+psycopg://` URLs for Alembic
-- Minimal **`app_metadata`** table as a migration probe
-
-Current schema authority: `supabase/migrations/` on Supabase PostgreSQL (see ADR 0002).
 
 ### Provisional LLM boundary (Day 1)
 
@@ -33,4 +24,3 @@ Current schema authority: `supabase/migrations/` on Supabase PostgreSQL (see ADR
 
 - Developers may use local PostgreSQL (package install or `docker compose up db`) for tests; production uses Supabase.
 - Telegram polling runs in-process with the API; production must keep a single polling replica while this mode is used. Webhooks are not implemented.
-- CrewAI scaffold removed; not part of Magnus MVP.

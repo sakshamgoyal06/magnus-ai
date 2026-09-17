@@ -44,7 +44,7 @@ Async form (Magnus runtime):
 postgresql+asyncpg://postgres:YOUR_PASSWORD@db.uktsxijrewbqjcjnrfdv.supabase.co:5432/postgres
 ```
 
-If the password has special characters, URL-encode them. Supabase requires TLS; the app enables SSL for `*.supabase.co` and `*.pooler.supabase.com` hosts.
+If the password has special characters, URL-encode them. Supabase requires TLS; the app uses asyncpg **`ssl=require`** for `*.supabase.co` and `*.pooler.supabase.com` (encrypted connection; required on Railway for the session pooler).
 
 **Do not use the default Direct connection URI on Railway** unless your project has the Supabase IPv4 add-on. Direct hostnames are IPv6-first; Railway often fails with `[Errno -2] Name or service not known`. Use **Session pooler** from the Connect panel instead.
 

@@ -14,22 +14,16 @@ These documents are the **authoritative product and build reference** for the cl
 2. **What to build each day** — the matching day section in `MVP_BUILD_PLAN.md`
 3. **Whether the day is done** — `BUILD_GATES.md` for that day (PASS / PASS WITH DEBT / FAIL)
 
-## Related docs (created during the build)
+## Related docs (Day 1)
 
-The build plan calls for additional living documents as implementation proceeds, for example:
+- [PRODUCT_CONTRACT.md](../../PRODUCT_CONTRACT.md)
+- [ARCHITECTURE.md](../ARCHITECTURE.md)
+- [SOURCE_OF_TRUTH.md](../SOURCE_OF_TRUTH.md) — infrastructure ownership
+- [SUPABASE_MIGRATIONS.md](../SUPABASE_MIGRATIONS.md) — schema workflow
+- [DEPLOYMENT_RAILWAY.md](../DEPLOYMENT_RAILWAY.md) — production deploy
+- [adr/0001-day1-foundation.md](../adr/0001-day1-foundation.md), [adr/0002-supabase-persistence-and-migrations.md](../adr/0002-supabase-persistence-and-migrations.md)
 
-- `PRODUCT_CONTRACT.md` (Day 1)
-- `ARCHITECTURE.md`, `DOMAIN_MODEL.md`, daily notes under `docs/daily/`
-
-Living docs created so far:
-
-- [PRODUCT_CONTRACT.md](../../PRODUCT_CONTRACT.md) (Day 1)
-- [ARCHITECTURE.md](../ARCHITECTURE.md) (Day 1)
-- [SOURCE_OF_TRUTH.md](../SOURCE_OF_TRUTH.md) (Day 1 — infrastructure ownership)
-- [SUPABASE_MIGRATIONS.md](../SUPABASE_MIGRATIONS.md) (schema workflow)
-- [adr/0002-supabase-persistence-and-migrations.md](../adr/0002-supabase-persistence-and-migrations.md)
-
-Product authority: this starter kit plus `PRODUCT_CONTRACT.md`. Infrastructure authority: `docs/SOURCE_OF_TRUTH.md`. Stack in `MVP_BUILD_PLAN.md` §8 still mentions Alembic historically; **ADR 0002** is authoritative for migrations (Supabase only).
+Product authority: this starter kit plus `PRODUCT_CONTRACT.md`. Infrastructure authority: `docs/SOURCE_OF_TRUTH.md`.
 
 ## Cursor
 

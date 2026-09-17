@@ -398,7 +398,7 @@ Backend:
 - FastAPI
 - PostgreSQL
 - SQLAlchemy 2.x
-- Alembic
+- Supabase CLI (`supabase/migrations/` in git)
 - Pydantic
 - python-telegram-bot or aiogram
 - pytest
